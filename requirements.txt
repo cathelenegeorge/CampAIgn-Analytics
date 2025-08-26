@@ -1,0 +1,10 @@
+pandas>=1.3
+numpy
+scipy
+statsmodels
+matplotlib
+seaborn
+python-pptx
+reportlab
+openai
+pytest
