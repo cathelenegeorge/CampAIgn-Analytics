@@ -208,31 +208,75 @@ CampAIgn Analytics runs as a fully automated pipeline that transforms raw campai
 
 ---
 
-## 🗄️ SQL Workflow
-- **`create_table.sql`**  
-  Creates:  
-  - `raw_campaign_data` (staging; mirrors CSV headers for `.import`)  
-  - `campaign_data` (normalized; SQL-friendly columns & types)
+## 📜 Core SQL Scripts  
 
-- **`cleanup_and_reload.sql`**  
-  Clears old data, imports `cleaned_campaign.csv` into staging, drops header rows if any, inserts **distinct** rows into `campaign_data`, and prints counts.
+### **`create_table.sql`**  
+✅ Defines schema for:  
+- **`raw_campaign_data`** → staging layer that mirrors raw CSV headers (for direct `.import`).  
+- **`campaign_data`** → normalized analysis table with SQL-friendly columns & types.  
 
-- **`sanity_checks.sql`**  
-  Validates row counts, date range, nulls, and group distribution.
+🔹 **Why it matters:** Establishes a **clean separation** between raw input and normalized, analysis-ready data.  
 
-- **`metrics_calculation.sql`**  
-  Group-level KPIs: CTR, Conversion Rate, CPC, CPA, CPM, and funnel step rates.
+---
 
-- **`ab_summary.sql`**  
-  Side-by-side comparison of groups with lift metrics and a simple winner decision.
+### **`cleanup_and_reload.sql`**  
+✅ Automates:  
+- Clearing stale data  
+- Importing fresh `cleaned_campaign.csv` into staging  
+- Dropping header rows if present  
+- Inserting **deduplicated rows** into `campaign_data`  
+- Printing row counts for validation  
 
-- **`daily_trends.sql`**  
-  Time-series KPIs (CTR & Conversion) per group for drift/ramp-up detection.
+🔹 **Why it matters:** Guarantees **data freshness, consistency, and deduplication** at every run.  
 
-- **`create_views.sql`**  
-  Reusable views:  
-  - `vw_group_kpis` (overall KPIs by group)  
-  - `vw_daily_kpis` (daily breakdown by group)
+---
+
+### **`sanity_checks.sql`**  
+✅ Validates:  
+- Row counts  
+- Null handling  
+- Date range alignment  
+- Control vs Test group distribution  
+
+🔹 **Why it matters:** Ensures **data integrity** before downstream KPI calculations.  
+
+---
+
+### **`metrics_calculation.sql`**  
+✅ Computes **group-level KPIs**:  
+- CTR (Click-Through Rate)  
+- Conversion Rate  
+- CPC (Cost per Click)  
+- CPA (Cost per Acquisition)  
+- CPM (Cost per Mille)  
+- Funnel step conversion rates  
+
+🔹 **Why it matters:** Provides the **quantitative backbone** for campaign comparison.  
+
+---
+
+### **`ab_summary.sql`**  
+✅ Delivers **side-by-side comparison** of Group A vs Group B with:  
+- Lift metrics  
+- Winner declaration (best performing group)  
+
+🔹 **Why it matters:** Converts KPIs into a **direct decision framework** for marketing teams.  
+
+---
+
+### **`daily_trends.sql`**  
+✅ Generates **time-series KPIs** (CTR & Conversion) per group.  
+
+🔹 **Why it matters:** Detects **performance drift, learning effects, or ramp-up trends**.  
+
+---
+
+### **`create_views.sql`**  
+✅ Defines **reusable views**:  
+- `vw_group_kpis` → Overall KPIs by group  
+- `vw_daily_kpis` → Daily breakdown by group  
+
+🔹 **Why it matters:** Simplifies queries for analysts & integrates cleanly into the **Python pipeline**.  
 
 ---
 
