@@ -45,6 +45,7 @@ The project integrates:
 
 ---
 ## Architecture Diagram :
+```
 
 CampAIgn-Analytics/
 ├─ data/
@@ -119,6 +120,7 @@ CampAIgn-Analytics/
 ├─ sql.db                     # SQLite database (often gitignored)
 ├─ requirements.txt
 └─ README.md
+```
 
 
 ## 🔄 Project Workflow
