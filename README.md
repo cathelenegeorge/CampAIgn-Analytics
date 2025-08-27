@@ -39,20 +39,15 @@ Instead of just comparing raw metrics, this system delivers a fully automated wo
 
 💡 This project demonstrates qualities like scale—automation, reproducibility, and AI-powered decision intelligence—making it directly relevant to solving large-scale data challenges in industry.
 
-
-
-  - Generated via `loader.py` + `cleaner.py`.  
-  - Fixes headers, enforces datatypes, drops invalid rows.  
-  - Serves as the single source of truth for analysis.
+    
 ## 📂 Dataset
 
 The project is designed around a realistic digital marketing dataset, structured to mirror how enterprises manage campaign analytics pipelines.
 
 - **Raw dataset (`data/raw/campaign_data.csv`)**
   - Captures end-to-end campaign performance metrics:
-    - `Campaign Name, Date, Spend [USD], # of Impressions, Reach, # of Website Clicks, # of Searches, # of View Content, # of Add to Cart, # of Purchase, group`
-    - `group` indicates Control (**A**) vs Test (**B**)
-  - The group field differentiates Control (A) vs Test (B) cohorts, enabling rigorous A/B testing.
+    - `Campaign Name, Date, Spend [USD], # of Impressions, Reach, # of Website Clicks, # of Searches, # of View Content, # of Add to Cart, # of Purchase`
+
 
     <img width="836" height="854" alt="campaign_data" src="https://github.com/user-attachments/assets/20cd3f18-d537-457a-9592-46620b99818a" />
     
@@ -64,6 +59,8 @@ The project is designed around a realistic digital marketing dataset, structured
     - Removal of invalid or incomplete rows
     - Normalized format to ensure reproducibility
   - Acts as the “single source of truth” for all downstream analysis.
+  -  - `group` indicates Control (**A**) vs Test (**B**)
+  - The group field differentiates Control (A) vs Test (B) cohorts, enabling rigorous A/B testing.
     
     <img width="719" height="727" alt="clean_campaign" src="https://github.com/user-attachments/assets/8e93b498-152f-49d2-a632-5d05dd6948c8" />
 
@@ -72,7 +69,10 @@ The project is designed around a realistic digital marketing dataset, structured
 
 
 ---
-## Architecture Diagram :
+## 🏗️ Architecture Overview
+
+CampAIgn Analytics follows a modular, production-grade architecture designed for clarity, scalability, and automation.
+
 ```
 
 CampAIgn-Analytics/
@@ -149,6 +149,15 @@ CampAIgn-Analytics/
 ├─ requirements.txt
 └─ README.md
 ```
+**🔎 Layer-by-Layer Purpose**
+- data/ → Stores raw campaign CSVs and cleaned datasets (single source of truth).
+- dbms/ → SQL layer ensures reproducible KPI computation and analytical rigor.
+- src/ → Python package for data processing, statistical testing, visualization, and AI   reporting.
+- notebook/ → Sandbox for interactive exploration and chart prototyping.
+- reports/ → Automatically generated executive-ready deliverables in PDF & PPTX format.
+- sql.db → Lightweight database for portability & reproducibility.
+
+💡 This architecture demonstrates a full **data engineering + analytics pipeline**: from raw data ingestion to AI-generated business insights
 
 
 ## 🔄 Project Workflow
