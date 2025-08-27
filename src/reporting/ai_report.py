@@ -17,12 +17,8 @@ except ImportError:
 
 PROMPT_TEMPLATE = """
 You are a professional data analytics report writer and slide-writer for stakeholders.You need to give a detailed report starting from introduction
-till the very end in a clear concise and narrative manner make it as brief as possible and ensure to provide the following headings with clear explanation
-too.The headings are : Background and hypothesis.
-Analysis steps, metrics, anomalies.
-Statistical significance, ROI calculation.
-Blockers and how you approached uncertain areas.
-Recommendations to stakeholders.
+till the very end in a clear concise and narrative manner make it as detailed as possible and ensure to to analyse all the JSON inputs given and 
+write down on impacts and whats better
 
 Input JSON (metrics, stats_results, charts, notes) is provided below.
 
@@ -37,6 +33,9 @@ Requirements:
 - For narrative, include summary, interpretation, limitations, and clear recommendations.
 - Mention data anomalies if present.
 - Keep bullets concise (<18 words), but provide interpretation for each metric.
+- Distinguish clearly between post-click CR (Purchases/Clicks) and reach-based CR (Purchases/Reach). 
+- Prefer percentages for CR; show p-values and 95% CIs for differences.
+
 
 
 Output format (JSON):
@@ -68,11 +67,47 @@ Rules:
 """
 
 def generate_prompt_payload(metrics: Dict, stats_results: Dict, chart_paths: Dict, extra_notes: str = "") -> str:
+    # Add human-friendly fields the AI can read directly
+    def pct(x): 
+        return None if x is None or (isinstance(x, float) and (x != x)) else f"{x*100:.2f}%"
+    def fmt(x): 
+        return None if x is None or (isinstance(x, float) and (x != x)) else f"{x:.3f}"
+
+    pretty = {}
+    if "cr_click_based" in stats_results:
+        c = stats_results["cr_click_based"]
+        pretty["click_cr"] = {
+            "A": pct(c.get("cr_A")), "B": pct(c.get("cr_B")),
+            "diff": pct(c.get("diff")), "pvalue": fmt(c.get("pvalue")),
+            "diff_ci_95": [pct(c["diff_ci_95"][0]), pct(c["diff_ci_95"][1])]
+        }
+    if "cr_reach_based" in stats_results:
+        r = stats_results["cr_reach_based"]
+        pretty["reach_cr"] = {
+            "A": pct(r.get("cr_A")), "B": pct(r.get("cr_B")),
+            "diff": pct(r.get("diff")), "pvalue": fmt(r.get("pvalue")),
+            "diff_ci_95": [pct(r["diff_ci_95"][0]), pct(r["diff_ci_95"][1])]
+        }
+    if "rpu_ttest" in stats_results:
+        t = stats_results["rpu_ttest"]
+        pretty["rpu"] = {
+            "A_mean": fmt(t.get("rpu_A_mean")),
+            "B_mean": fmt(t.get("rpu_B_mean")),
+            "diff": fmt(t.get("mean_diff")),
+            "pvalue": fmt(t.get("pvalue")),
+            "ci_95": [fmt(t["ci_95"][0]), fmt(t["ci_95"][1])]
+        }
+
     payload = {
         "metrics": metrics,
         "stats_results": stats_results,
+        "stats_pretty": pretty,  # <-- human-friendly mirror
         "charts": chart_paths,
         "notes": extra_notes,
+        "definitions": {
+            "click_cr": "Conversion Rate (post-click) = Purchases / Website Clicks",
+            "reach_cr": "Conversion Rate (reach) = Purchases / Reach"
+        }
     }
     return PROMPT_TEMPLATE + "\n\nINPUT:\n" + json.dumps(payload, indent=2)
 
