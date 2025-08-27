@@ -1,5 +1,3 @@
-# CampAIgn-Analytics
-CampAIgn Analytics is an end-to-end A/B testing pipeline that cleans campaign data, loads it into SQLite, computes KPIs, generates interactive visualizations, and delivers AI-powered PDF and PPTX reports to identify the winning campaign.
 
 # 🚀 CampAIgn Analytics
 
@@ -46,6 +44,82 @@ The project integrates:
   - Serves as the single source of truth for analysis.  
 
 ---
+## Architecture Diagram :
+
+CampAIgn-Analytics/
+├─ data/
+│  ├─ raw/
+│  │  └─ campaign_data.csv
+│  └─ processed/
+│     └─ cleaned_campaign.csv
+│
+├─ dbms/                      # SQL workflow
+│  ├─ create_table.sql
+│  ├─ cleanup_and_reload.sql
+│  ├─ sanity_checks.sql
+│  ├─ metrics_calculation.sql
+│  ├─ ab_summary.sql
+│  ├─ daily_trends.sql
+│  └─ create_views.sql
+│
+├─ src/                       # Python package (run: python -m src.pipeline)
+│  ├─ __init__.py
+│  ├─ pipe.py
+│  ├─ data_processing/
+│  │  ├─ __init__.py
+│  │  ├─ loader.py
+│  │  └─ cleaner.py
+│  ├─ analysis_engine/
+│  │  ├─ __init__.py
+│  │  ├─ metrics.py
+│  │  ├─ statistic_test.py
+│  │  └─ visualization.py
+│  └─ reporting/
+│     ├─ __init__.py
+│     ├─ ai_report.py
+│     └─ export.py
+│ 
+├─ notebook/
+│  ├─ chart
+│  |  ├─ ts_purchases_by_group.html
+│  |  ├─ ts_impressions_by_group.html
+│  |  ├─ ts_spend_by_group.html
+│  |  ├─ ts_clicks_by_group.html
+│  |  ├─ funnel_group_A.html
+│  |  ├─ funnel_group_B.html
+│  |  ├─ pie_spend_vs_purchases_group_A.html
+│  |  └─ pie_spend_vs_purchases_group_B.html
+   |─ chart_image
+│  |  ├─ ts_purchases_by_group.png
+│  |  ├─ ts_impressions_by_group.png
+│  |  ├─ ts_spend_by_group.png
+│  |  ├─ ts_clicks_by_group.png
+│  |  ├─ funnel_group_A.png
+│  |  ├─ funnel_group_B.png
+│  |  ├─ pie_spend_vs_purchases_group_A.png
+│  |  └─ pie_spend_vs_purchases_group_B.png
+│  └─ visualisation.ipynb
+│
+├─ reports/
+│  ├─ charts/
+│  │  ├─ conversion_rate_by_group.png
+│  │  ├─ revenue_distribution.png
+│  │  ├─ roi_comparison.png
+│  │  ├─ ts_purchases_by_group.png
+│  │  ├─ ts_impressions_by_group.png
+│  │  ├─ ts_spend_by_group.png
+│  │  ├─ ts_clicks_by_group.png
+│  │  ├─ funnel_group_A.png
+│  │  ├─ funnel_group_B.png
+│  │  ├─ pie_spend_vs_purchases_group_A.png
+│  │  └─ pie_spend_vs_purchases_group_B.png
+│  ├─ final_report.pdf
+│  └─ final_report.pptx
+│
+├─ sql.db                     # SQLite database (often gitignored)
+├─ requirements.txt
+└─ README.md
+
 
 ## 🔄 Project Workflow
 1. **Raw Data → Processed Data**  
@@ -153,7 +227,6 @@ The project integrates:
 - Funnel analysis shows **A** drops more between *View Content → Add to Cart*.  
 - **Recommendation:** allocate more budget to **B**; optimize mid-funnel for **A**.
 
----
 
 ## 🛠 Tech Stack
 - **Python 3.10+** — pandas, plotly, matplotlib, seaborn  
@@ -168,7 +241,7 @@ The project integrates:
 
 1. **Clone the repo**   
 
-       git clone https://github.com/cathelenegeorgee/CampAIgn-Analytics.gitcd CampAIgn-Analytics
+       git clone https://github.com/cathelenegeorge/CampAIgn-Analytics.gitcd CampAIgn-Analytics
 
 3. **Create a virtual environment**
 
