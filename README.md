@@ -1,0 +1,204 @@
+# CampAIgn-Analytics
+CampAIgn Analytics is an end-to-end A/B testing pipeline that cleans campaign data, loads it into SQLite, computes KPIs, generates interactive visualizations, and delivers AI-powered PDF and PPTX reports to identify the winning campaign.
+
+# 🚀 CampAIgn Analytics
+
+> **An end-to-end A/B testing analytics pipeline that cleans campaign data, loads it into SQLite, computes KPIs, generates interactive visualizations, and delivers AI-powered PDF and PPTX reports to identify the winning campaign.**
+
+---
+
+## 📖 Table of Contents
+1. [Introduction](#introduction)  
+2. [Dataset](#dataset)  
+3. [Project Workflow](#project-workflow)  
+4. [Folder Structure](#folder-structure)  
+5. [SQL Workflow](#sql-workflow)  
+6. [Python Pipeline](#python-pipeline)  
+7. [Notebooks & Visualizations](#notebooks--visualizations)  
+8. [Results & Insights](#results--insights)  
+9. [Tech Stack](#tech-stack)  
+10. [Setup Instructions](#setup-instructions)  
+11. [Future Improvements](#future-improvements)  
+12. [License](#license)  
+
+---
+
+## 🔍 Introduction
+**CampAIgn Analytics** is a professional-grade **A/B testing pipeline** that evaluates digital marketing campaigns (Group A vs Group B) to determine the winner based on efficiency and conversion.  
+
+The project integrates:  
+- **Python** for data processing, orchestration, and AI reporting  
+- **SQLite + SQL** for reproducible KPI computation  
+- **Plotly + Jupyter** for interactive visualizations  
+- **PDF & PPTX reporting** for stakeholder-ready outputs  
+
+---
+
+## 📂 Dataset
+- **Raw dataset (`data/raw/campaign_data.csv`)**
+  - Contains campaign metrics including:
+    - `Campaign Name, Date, Spend [USD], # of Impressions, Reach, # of Website Clicks, # of Searches, # of View Content, # of Add to Cart, # of Purchase, group`
+  - `group` indicates Control (**A**) vs Test (**B**).
+
+- **Processed dataset (`data/processed/cleaned_campaign.csv`)**
+  - Generated via `loader.py` + `cleaner.py`.  
+  - Fixes headers, enforces datatypes, drops invalid rows.  
+  - Serves as the single source of truth for analysis.  
+
+---
+
+## 🔄 Project Workflow
+1. **Raw Data → Processed Data**  
+   - Clean CSV created and saved under `data/processed/`.
+
+2. **Database Loading**  
+   - Tables created (`create_table.sql`).  
+   - Cleaned data loaded into SQLite (`sql.db`).  
+
+3. **Sanity Checks**  
+   - Row counts, nulls, date ranges, and group distribution validated.  
+
+4. **KPI Calculation**  
+   - CTR, Conversion Rate, CPC, CPA, CPM via SQL.  
+
+5. **Analysis & Summary**  
+   - Winner declared (Group A or B) with lift analysis.  
+
+6. **Visualizations**  
+   - Interactive Plotly charts (time-series, funnels, pies).  
+
+7. **AI-Generated Reports**  
+   - Pipeline generates **PDF & PPTX** with charts + natural language insights.  
+
+---
+
+---
+
+## 🗄️ SQL Workflow
+- **`create_table.sql`**  
+  Creates:  
+  - `raw_campaign_data` (staging; mirrors CSV headers for `.import`)  
+  - `campaign_data` (normalized; SQL-friendly columns & types)
+
+- **`cleanup_and_reload.sql`**  
+  Clears old data, imports `cleaned_campaign.csv` into staging, drops header rows if any, inserts **distinct** rows into `campaign_data`, and prints counts.
+
+- **`sanity_checks.sql`**  
+  Validates row counts, date range, nulls, and group distribution.
+
+- **`metrics_calculation.sql`**  
+  Group-level KPIs: CTR, Conversion Rate, CPC, CPA, CPM, and funnel step rates.
+
+- **`ab_summary.sql`**  
+  Side-by-side comparison of groups with lift metrics and a simple winner decision.
+
+- **`daily_trends.sql`**  
+  Time-series KPIs (CTR & Conversion) per group for drift/ramp-up detection.
+
+- **`create_views.sql`**  
+  Reusable views:  
+  - `vw_group_kpis` (overall KPIs by group)  
+  - `vw_daily_kpis` (daily breakdown by group)
+
+---
+
+## 🐍 Python Pipeline
+- **`pipe.py`** — Orchestrator that:
+  - Runs data cleaning & loading  
+  - Executes SQL workflows  
+  - Computes KPIs & trends  
+  - Generates Plotly charts  
+  - Produces AI-written insights  
+  - Exports **PDF** and **PPTX** reports to `reports/`
+
+- **`data_processing/`**
+  - `loader.py` — Loads raw CSV → SQLite staging table.  
+  - `cleaner.py` — Cleans & standardizes dataset → `data/processed/cleaned_campaign.csv`.
+
+- **`analysis_engine/`**
+  - `metrics.py` — Python-side KPIs (optional; mirrors SQL).  
+  - `statistic_test.py` — Significance testing (e.g., chi-square/t-tests).  
+  - `visualization.py` — Plotly charts saved to `reports/charts/`.
+
+- **`reporting/`**
+  - `ai_report.py` — Generates narrative insights with AI.  
+  - `exporter.py` — Compiles charts + insights → **PDF/PPTX**.
+
+---
+
+## 📓 Notebooks & Visualizations
+- **`visualisation.ipynb`** — Interactive Plotly visuals (saved as HTML for sharing).  
+
+**Interactive HTML charts (open in browser):**
+- Time Series  
+  - [Impressions Over Time](notebook/chart_image/ts_impressions_by_group.png)  
+  - [Spend Over Time](notebook/chart_image/ts_spend_by_group.png)  
+  - [Purchases Over Time](notebook/chart_image/ts_purchases_by_group.png)  
+  - [Website Clicks Over Time](reports/chart_image/ts_clicks_by_group.png)  
+- Composition (Spend vs Purchases)  
+  - [Group A](notebook/chart_image/pie_spend_vs_purchases_A.png)  
+  - [Group B](notebook/chart_image/pie_spend_vs_purchases_B.png)  
+- Funnels  
+  - [Conversion Funnel — Group A](notebook/chart_image/funnel_group_A.png)  
+  - [Conversion Funnel — Group B](notebook/chart_image/funnel_group_B.png)
+
+> GitHub shows notebook outputs as **static previews**. These HTML files keep full **Plotly interactivity** (zoom, hover, toggle series) when opened locally or via a static server.
+
+---
+
+## 📈 Results & Insights
+- **Group B** consistently outperformed **Group A**:
+  - Higher **Conversion Rate** (≈ +10%)  
+  - Lower **Cost per Acquisition (CPA)**  
+- Funnel analysis shows **A** drops more between *View Content → Add to Cart*.  
+- **Recommendation:** allocate more budget to **B**; optimize mid-funnel for **A**.
+
+---
+
+## 🛠 Tech Stack
+- **Python 3.10+** — pandas, plotly, matplotlib, seaborn  
+- **SQLite 3.4+** — SQL-first KPI computation & views  
+- **VS Code** — with **SQLite3 Editor** extension for grid outputs  
+- **Jupyter Notebooks** — EDA & interactive charts  
+- **AI Reporting** — automated insights + **PDF/PPTX** export
+
+---
+
+## ⚙️ Setup Instructions
+
+1. **Clone the repo**   
+
+       git clone https://github.com/cathelenegeorgee/CampAIgn-Analytics.gitcd CampAIgn-Analytics
+
+3. **Create a virtual environment**
+
+       -python -m venv venv   
+       -source venv/bin/activate   # Mac/Linux     
+       -venv\Scripts\activate      # Windows  
+       -pip install -r requirements.txt
+
+
+4. **Create database schema**
+
+       -sqlite3 sql.db ".read dbms/create_table.sql"
+
+
+5. **Load cleaned dataset**
+
+       -sqlite3 sql.db ".read dbms/cleanup_and_reload.sql"
+
+
+6. **Run sanity checks**
+
+       -sqlite3 -header -column sql.db ".read dbms/sanity_checks.sql"
+
+
+7. **Run full pipeline**
+
+        -python -m src.pipeline
+
+
+Open interactive visuals
+
+Open the PNG files under notebook/chart_image/ see the links above!.
+
