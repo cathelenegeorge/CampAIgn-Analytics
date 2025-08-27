@@ -174,8 +174,8 @@ CampAIgn Analytics runs as a fully automated pipeline that transforms raw campai
       - Cleaned data loaded into `sql.db` for reproducibility and fast queries.
 
 **3. ✅ Sanity Checks:**  
-      - Validations ensure data integrity:  
-        - Row counts match  
+- Validations ensure data integrity:  
+  - Row counts match  
         - Nulls handled  
         - Date ranges consistent  
         - Control/Test group distribution verified  
