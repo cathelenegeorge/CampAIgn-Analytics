@@ -278,29 +278,70 @@ CampAIgn Analytics runs as a fully automated pipeline that transforms raw campai
 
 🔹 **Why it matters:** Simplifies queries for analysts & integrates cleanly into the **Python pipeline**.  
 
+💡 This **SQL workflow** demonstrates **data engineering best practices—staging, normalization, validation, reproducible KPIs, and reusable views—mirroring the scalable, audit-ready pipelines**
+
 ---
 
-## 🐍 Python Pipeline
-- **`pipe.py`** — Orchestrator that:
-  - Runs data cleaning & loading  
-  - Executes SQL workflows  
-  - Computes KPIs & trends  
-  - Generates Plotly charts  
-  - Produces AI-written insights  
-  - Exports **PDF** and **PPTX** reports to `reports/`
+## 🐍 Python Pipeline  
 
-- **`data_processing/`**
-  - `loader.py` — Loads raw CSV → SQLite staging table.  
-  - `cleaner.py` — Cleans & standardizes dataset → `data/processed/cleaned_campaign.csv`.
+The **Python layer** acts as the **orchestrator** of the entire workflow — connecting data ingestion, SQL analytics, visualization, and AI-powered reporting into one seamless pipeline.  
 
-- **`analysis_engine/`**
-  - `metrics.py` — Python-side KPIs (optional; mirrors SQL).  
-  - `statistic_test.py` — Significance testing (e.g., chi-square/t-tests).  
-  - `visualization.py` — Plotly charts saved to `reports/charts/`.
+---
 
-- **`reporting/`**
-  - `ai_report.py` — Generates narrative insights with AI.  
-  - `exporter.py` — Compiles charts + insights → **PDF/PPTX**.
+### **`pipe.py`** – Orchestrator  
+✅ Executes the full pipeline:  
+- Runs **data cleaning & loading**  
+- Executes **SQL workflows**  
+- Computes **KPIs & trends**  
+- Generates **Plotly charts**  
+- Produces **AI-written insights**  
+- Exports **PDF & PPTX reports** into `reports/`  
+
+🔹 **Why it matters:** Serves as the **automation backbone**, ensuring reproducibility and one-command execution.  
+
+---
+
+### 📂 **`data_processing/`**  
+
+- **`loader.py`**  
+  ✅ Loads raw CSV → SQLite staging table.  
+  🔹 *Guarantees smooth ingestion of new campaign data.*  
+
+- **`cleaner.py`**  
+  ✅ Cleans & standardizes dataset → `data/processed/cleaned_campaign.csv`.  
+  🔹 *Provides a reliable “single source of truth” for analysis.*  
+
+---
+
+### 📂 **`analysis_engine/`**  
+
+- **`metrics.py`**  
+  ✅ Computes Python-side KPIs (mirrors SQL).  
+  🔹 *Adds flexibility for analysts preferring Python over SQL.*  
+
+- **`statistic_test.py`**  
+  ✅ Performs significance testing (chi-square, t-tests).  
+  🔹 *Enables **statistical rigor** in A/B testing decisions.*  
+
+- **`visualization.py`**  
+  ✅ Builds Plotly charts → saved into `reports/charts/`.  
+  🔹 *Transforms metrics into **interactive, decision-friendly visuals**.*  
+
+---
+
+### 📂 **`reporting/`**  
+
+- **`ai_report.py`**  
+  ✅ Generates **natural-language insights** using AI.  
+  🔹 *Bridges the gap between raw analytics and **executive storytelling**.*  
+
+- **`export.py`**  
+  ✅ Compiles **charts + insights** into polished **PDF & PPTX reports**.  
+  🔹 *Delivers **stakeholder-ready outputs** for instant consumption.*  
+
+---
+
+💡 *This modular Python pipeline ensures **scalability, maintainability, and automation**—hallmarks of production-grade systems *  
 
 ---
 
