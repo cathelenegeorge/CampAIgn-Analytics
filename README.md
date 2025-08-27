@@ -159,29 +159,6 @@ CampAIgn-Analytics/
 
 💡 This architecture demonstrates a full **data engineering + analytics pipeline**: from raw data ingestion to AI-generated business insights
 
-
-## 🔄 Project Workflow
-1. **Raw Data → Processed Data**  
-   - Clean CSV created and saved under `data/processed/`.
-
-2. **Database Loading**  
-   - Tables created (`create_table.sql`).  
-   - Cleaned data loaded into SQLite (`sql.db`).  
-
-3. **Sanity Checks**  
-   - Row counts, nulls, date ranges, and group distribution validated.  
-
-4. **KPI Calculation**  
-   - CTR, Conversion Rate, CPC, CPA, CPM via SQL.  
-
-5. **Analysis & Summary**  
-   - Winner declared (Group A or B) with lift analysis.  
-
-6. **Visualizations**  
-   - Interactive Plotly charts (time-series, funnels, pies).  
-
-7. **AI-Generated Reports**  
-   - Pipeline generates **PDF & PPTX** with charts + natural language insights.
 ## 🔄 Project Workflow
 
 CampAIgn Analytics runs as a fully automated pipeline that transforms raw campaign data into executive-ready insights and reports.
