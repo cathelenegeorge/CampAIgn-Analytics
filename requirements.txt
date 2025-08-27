@@ -8,4 +8,4 @@ python-pptx
 reportlab
 openai
 pytest
-Pilloq
+Pillow
