@@ -213,12 +213,16 @@ CampAIgn Analytics runs as a fully automated pipeline that transforms raw campai
   - Control/Test group distribution verified  
 
 **4. 📊 KPI Calculation:**  
-- Core performance metrics computed directly in SQL:  
-  - CTR (Click-Through Rate)  
-  - Conversion Rate  
-  - CPC (Cost per Click)  
-  - CPA (Cost per Acquisition)  
-  - CPM (Cost per Mille/1000 Impressions)  
+- Core performance metrics computed directly in SQL:
+  - CTR (Click-Through Rate) → Clicks ÷ Impressions
+  - Conversion Rate → Purchases ÷ Clicks
+  - CPC (Cost per Click) → Spend ÷ Clicks
+  - CPA (Cost per Acquisition) → Spend ÷ Purchases
+  - CPM (Cost per 1,000 Impressions) → (Spend ÷ Impressions) × 1000
+  - Reach Rate → Reach ÷ Impressions
+  - Search Rate → Searches ÷ Clicks
+  - View Content Rate → View Content ÷ Clicks
+  - Add to Cart Rate → Add to Cart ÷ Clicks
 
 **5. 🔍 Analysis & Summary:**   
 - Statistical testing identifies the winning group (A or B).   
