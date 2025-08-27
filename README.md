@@ -22,17 +22,6 @@
 ---
 
 ## 🔍 Introduction
-**CampAIgn Analytics** is a professional-grade **A/B testing pipeline** that evaluates digital marketing campaigns (Group A vs Group B) to determine the winner based on efficiency and conversion.  
-
-The project integrates:  
-- **Python** for data processing, orchestration, and AI reporting  
-- **SQLite + SQL** for reproducible KPI computation  
-- **Plotly + Jupyter** for interactive visualizations  
-- **PDF & PPTX reporting** for stakeholder-ready outputs
-
----
-
-## 🔍 Introduction
 
 **CampAIgn Analytics** is an end-to-end  **A/B intelligent testing pipeline** that empowers marketing teams to make data-driven campaign decisions with speed and confidence.
 
@@ -50,16 +39,37 @@ Instead of just comparing raw metrics, this system delivers a fully automated wo
 
 💡 This project demonstrates qualities like scale—automation, reproducibility, and AI-powered decision intelligence—making it directly relevant to solving large-scale data challenges in industry.
 
-## 📂 Dataset
-- **Raw dataset (`data/raw/campaign_data.csv`)**
-  - Contains campaign metrics including:
-    - `Campaign Name, Date, Spend [USD], # of Impressions, Reach, # of Website Clicks, # of Searches, # of View Content, # of Add to Cart, # of Purchase, group`
-  - `group` indicates Control (**A**) vs Test (**B**).
 
-- **Processed dataset (`data/processed/cleaned_campaign.csv`)**
+
   - Generated via `loader.py` + `cleaner.py`.  
   - Fixes headers, enforces datatypes, drops invalid rows.  
-  - Serves as the single source of truth for analysis.  
+  - Serves as the single source of truth for analysis.
+## 📂 Dataset
+
+The project is designed around a realistic digital marketing dataset, structured to mirror how enterprises manage campaign analytics pipelines.
+
+- **Raw dataset (`data/raw/campaign_data.csv`)**
+  - Captures end-to-end campaign performance metrics:
+    - `Campaign Name, Date, Spend [USD], # of Impressions, Reach, # of Website Clicks, # of Searches, # of View Content, # of Add to Cart, # of Purchase, group`
+    - `group` indicates Control (**A**) vs Test (**B**)
+  - The group field differentiates Control (A) vs Test (B) cohorts, enabling rigorous A/B testing.
+
+    <img width="836" height="854" alt="campaign_data" src="https://github.com/user-attachments/assets/20cd3f18-d537-457a-9592-46620b99818a" />
+    
+
+- **Processed dataset (`data/processed/cleaned_campaign.csv`)**
+  - Automatically generated via loader.py + cleaner.py.
+  - Enhancements applied:
+    - Standardized headers & enforced datatypes
+    - Removal of invalid or incomplete rows
+    - Normalized format to ensure reproducibility
+  - Acts as the “single source of truth” for all downstream analysis.
+    
+    <img width="719" height="727" alt="clean_campaign" src="https://github.com/user-attachments/assets/8e93b498-152f-49d2-a632-5d05dd6948c8" />
+
+
+✨ This structured data pipeline highlights best practices in data engineering—ensuring clean, validated, and analysis-ready datasets.
+
 
 ---
 ## Architecture Diagram :
