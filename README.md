@@ -345,40 +345,88 @@ The **Python layer** acts as the **orchestrator** of the entire workflow — con
 
 ---
 
-## 📓 Notebooks & Visualizations
-- **`visualisation.ipynb`** — Interactive Plotly visuals (saved as HTML for sharing).  
+## 📓 Notebooks & Visualizations  
 
-**Interactive HTML charts (open in browser):**
-- Time Series  
-  - [Impressions Over Time](notebook/chart_image/ts_impressions_by_group.png)  
-  - [Spend Over Time](notebook/chart_image/ts_spend_by_group.png)  
-  - [Purchases Over Time](notebook/chart_image/ts_purchases_by_group.png)  
-  - [Website Clicks Over Time](reports/chart_image/ts_clicks_by_group.png)  
-- Composition (Spend vs Purchases)  
-  - [Group A](notebook/chart_image/pie_spend_vs_purchases_A.png)  
-  - [Group B](notebook/chart_image/pie_spend_vs_purchases_B.png)  
-- Funnels  
-  - [Conversion Funnel — Group A](notebook/chart_image/funnel_group_A.png)  
-  - [Conversion Funnel — Group B](notebook/chart_image/funnel_group_B.png)
-
-> GitHub shows notebook outputs as **static previews**. These HTML files keep full **Plotly interactivity** (zoom, hover, toggle series) when opened locally or via a static server.
+The **Jupyter Notebook layer** provides an **exploration sandbox** for analysts and a bridge between raw SQL outputs and interactive dashboards.  
 
 ---
 
-## 📈 Results & Insights
-- **Group B** consistently outperformed **Group A**:
-  - Higher **Conversion Rate** (≈ +10%)  
-  - Lower **Cost per Acquisition (CPA)**  
-- Funnel analysis shows **A** drops more between *View Content → Add to Cart*.  
-- **Recommendation:** allocate more budget to **B**; optimize mid-funnel for **A**.
+### **`visualisation.ipynb`**  
+✅ Contains interactive **Plotly-based visualizations**.  
+✅ Charts are automatically saved as **HTML (for sharing)** and **PNG (for reports)**.  
+
+🔹 **Why it matters:** Enables both **exploratory analysis** during development and **stakeholder-ready visuals** for presentations.  
+
+---
+
+### 📊 Interactive Visuals  
+
+#### ⏳ **Time-Series Trends**  
+- [Impressions Over Time](notebook/chart_image/ts_impressions_by_group.png)  
+- [Spend Over Time](notebook/chart_image/ts_spend_by_group.png)  
+- [Purchases Over Time](notebook/chart_image/ts_purchases_by_group.png)  
+- [Website Clicks Over Time](reports/chart_image/ts_clicks_by_group.png)  
+
+#### 🥧 **Composition: Spend vs Purchases**  
+- [Group A](notebook/chart_image/pie_spend_vs_purchases_A.png)  
+- [Group B](notebook/chart_image/pie_spend_vs_purchases_B.png)  
+
+#### 🔄 **Conversion Funnels**  
+- [Group A Funnel](notebook/chart_image/funnel_group_A.png)  
+- [Group B Funnel](notebook/chart_image/funnel_group_B.png)  
+
+---
+
+💡 *These visualizations transform raw KPIs into **clear, story-driven insights**, helping decision-makers quickly identify trends, bottlenecks, and ROI patterns — exactly the type of visualization storytelling.*  
+
+---
+
+## 📈 Results & Insights  
+
+The A/B testing pipeline delivered **clear, data-backed outcomes** for campaign optimization:  
+
+---
+
+### 🔹 Key Findings  
+- 🚀 **Group B** consistently outperformed **Group A** across core KPIs:  
+  - **+10% higher Conversion Rate**  
+  - **Lower Cost per Acquisition (CPA)**  
+- 🔎 Funnel analysis revealed a **critical drop-off in Group A** between *View Content → Add to Cart*.  
+
+---
+
+### 🧭 Strategic Recommendation  
+- ✅ **Allocate more budget to Group B** to maximize ROI.  
+- ✅ **Optimize mid-funnel performance in Group A** by addressing cart abandonment and improving product engagement.  
+
+---
+
+💡 *This analysis not only identifies the winning variant but also provides **actionable business strategies**—demonstrating how data pipelines can directly influence **marketing ROI and decision-making at scale**.*  
 
 
-## 🛠 Tech Stack
-- **Python 3.10+** — pandas, plotly, matplotlib, seaborn  
-- **SQLite 3.4+** — SQL-first KPI computation & views  
-- **VS Code** — with **SQLite3 Editor** extension for grid outputs  
-- **Jupyter Notebooks** — EDA & interactive charts  
-- **AI Reporting** — automated insights + **PDF/PPTX** export
+## 🛠 Tech Stack  
+
+CampAIgn Analytics is built on a **modern, production-ready stack** that balances **data engineering rigor** with **AI-powered automation**.  
+
+- **🐍 Python 3.10+**  
+  ✅ Core pipeline language — leveraging **pandas** (data wrangling), **plotly/matplotlib/seaborn** (visualizations), and automation scripts.  
+
+- **🗄️ SQLite 3.4+**  
+  ✅ Lightweight relational database for **reproducible KPI computation** and creation of analytical views.  
+
+- **💻 VS Code**  
+  ✅ Development environment with the **SQLite3 Editor extension** for grid-based query outputs.  
+
+- **📓 Jupyter Notebooks**  
+  ✅ Used for **exploratory data analysis (EDA)**, prototyping, and building **interactive charts**.  
+
+- **🤖 AI Reporting**  
+  ✅ Automates **executive-level reporting** — generating insights and exporting stakeholder-ready **PDF & PPTX deliverables**.  
+
+---
+
+💡 *This stack demonstrates mastery of **data engineering, analytics, visualization, and AI automation**—the same foundations required to build scalable decision intelligence systems.*  
+
 
 ---
 
@@ -413,7 +461,7 @@ The **Python layer** acts as the **orchestrator** of the entire workflow — con
 
 7. **Run full pipeline**
 
-        -python -m src.pipeline
+        -python -m src.pipe
 
 
 Open interactive visuals
