@@ -181,9 +181,53 @@ CampAIgn-Analytics/
    - Interactive Plotly charts (time-series, funnels, pies).  
 
 7. **AI-Generated Reports**  
-   - Pipeline generates **PDF & PPTX** with charts + natural language insights.  
+   - Pipeline generates **PDF & PPTX** with charts + natural language insights.
+## 🔄 Project Workflow
 
----
+CampAIgn Analytics runs as a fully automated pipeline that transforms raw campaign data into executive-ready insights and reports.
+
+**⚡ Step-by-Step Flow**
+
+**1. 📥 Data Ingestion:**
+      - Raw campaign CSVs ingested.
+      - Processed into a clean CSV `(data/processed/cleaned_campaign.csv)` with standardized schema & datatypes.
+
+**2. 🗄️ Database Loading:**
+      - SQLite tables created via `create_table.sql`.
+      - Cleaned data loaded into `sql.db` for reproducibility and fast queries.
+
+**3. ✅ Sanity Checks:**
+      - Validations ensure data integrity:
+        - Row counts match
+        - Nulls handled
+        - Date ranges consistent
+        - Control/Test group distribution verified
+
+**4. 📊 KPI Calculation:**
+     - Core performance metrics computed directly in SQL:
+         - CTR (Click-Through Rate)
+         - Conversion Rate
+         - CPC (Cost per Click)
+         - CPA (Cost per Acquisition)
+         - CPM (Cost per Mille/1000 Impressions)
+
+**5. 🔍 Analysis & Summary:**
+    - Statistical testing identifies the winning group (A or B).
+    - Lift analysis quantifies improvement over the control.
+
+**6. 📈 Visualizations:**
+    - Interactive Plotly dashboards:
+        - Time-series trends
+        - Funnel analysis
+        - Spend vs Purchases breakdown (Pie charts)
+
+**7. 🤖 AI-Generated Reporting:**
+   - Pipeline produces PDF & PPTX reports with:
+        - Charts embedded
+        - Natural-language executive summaries
+        - Clear business recommendations
+
+💡 This workflow reflects a production-grade analytics system: data validation, reproducibility, statistical rigor, visualization, and AI-enhanced reporting.
 
 ---
 
