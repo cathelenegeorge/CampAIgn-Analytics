@@ -39,6 +39,38 @@ Instead of just comparing raw metrics, this system delivers a fully automated wo
 
 💡 This project demonstrates qualities like scale—automation, reproducibility, and AI-powered decision intelligence—making it directly relevant to solving large-scale data challenges in industry.
 
+# 📊 Case Study Overview
+
+This project simulates a real-world **marketing A/B test analysis**
+where two campaign groups (A & B) are compared to determine which
+delivers better business outcomes.
+
+## 🎯 Objective
+
+Identify the better-performing campaign using **SQL-based KPI analysis**
+and **interactive visualizations**.
+
+## 📈 Key Metrics Analyzed
+
+-   CTR (Click Through Rate)\
+-   CPC (Cost Per Click)\
+-   CPA (Cost Per Acquisition)\
+-   CPM (Cost Per Mille/1000 Impressions)\
+-   ROI (Return on Investment)
+
+## 🔄 Process
+
+1.  Cleaned and loaded campaign data into a **SQL database (SQLite)**.\
+2.  Computed KPIs using **SQL queries** to measure ad effectiveness.\
+3.  Built **interactive charts** (time-series, funnel, spend
+    vs. conversions) to visualize campaign performance.\
+4.  Automated **AI-generated PDF & PPTX reports** summarizing findings
+    for stakeholders.
+
+## 💡 Insight
+
+Analysis revealed **Group B outperformed Group A**, achieving a **higher
+CTR (+12%)** and **lower cost per purchase (-18%)**, making it the recommended campaign to scale.
     
 ## 📂 Dataset
 
